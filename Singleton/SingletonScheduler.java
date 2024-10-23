@@ -5,7 +5,7 @@ import Builder.Message;
 public class SingletonScheduler {
     private static SingletonScheduler instance;
 
-    private SingletonScheduler() { }
+    private SingletonScheduler() {}
 
     public static SingletonScheduler getInstance() {
         if (instance == null) {
@@ -15,7 +15,8 @@ public class SingletonScheduler {
     }
 
     public void scheduleMessage(Message message) {
-        System.out.println("Scheduling message in SingletonScheduler: " + message.getContent());
-        // Additional scheduling logic
+        // Log the message scheduling
+        System.out.println("Scheduling message in SingletonScheduler: " + message.getBody()); // Change getContent() to getBody()
+        // Add your scheduling logic here
     }
 }

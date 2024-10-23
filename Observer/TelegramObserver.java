@@ -9,8 +9,11 @@ public class TelegramObserver implements MessageSenderObserver {
 
     @Override
     public void update(Message message) {
-        if ("telegram".equalsIgnoreCase(message.getPlatform())) {
+        if ("telegram".equalsIgnoreCase(message.getType())) {  // Change to getType()
+            System.out.println("TelegramObserver: Sending Telegram message to " + message.getRecipient());
             messageSender.sendMessage(message);
+        } else {
+            System.out.println("TelegramObserver: Not a Telegram message. Ignoring...");
         }
     }
 }
