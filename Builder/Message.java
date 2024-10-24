@@ -5,14 +5,14 @@ import java.time.LocalDateTime;
 public class Message {
     private String recipient;
     private String body;
-    private String type; // Add this field to store the type of the message
+    private String type;
     private LocalDateTime scheduledTime;
 
     // Constructor
     public Message(String recipient, String body, String type, LocalDateTime scheduledTime) {
         this.recipient = recipient;
         this.body = body;
-        this.type = type; // Initialize the type
+        this.type = type;
         this.scheduledTime = scheduledTime;
     }
 
@@ -25,7 +25,7 @@ public class Message {
         return body;
     }
 
-    public String getType() {  // Add this method
+    public String getType() {
         return type;
     }
 
@@ -37,13 +37,13 @@ public class Message {
     public static class Builder {
         private String recipient;
         private String body;
-        private String type; // Field for message type
+        private String type;
         private LocalDateTime scheduledTime;
 
         public Builder(String recipient, String body, String type) {
             this.recipient = recipient;
             this.body = body;
-            this.type = type; // Set the type in the builder
+            this.type = type;
         }
 
         public Builder atTime(LocalDateTime scheduledTime) {

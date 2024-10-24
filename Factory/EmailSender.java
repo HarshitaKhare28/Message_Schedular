@@ -8,8 +8,8 @@ import java.util.Properties;
 public class EmailSender implements MessageSender {
     @Override
     public void sendMessage(Message message) {
-        final String username = "sender@gmail.com"; // Your email
-        final String password = "app password(12 digits) of gmail account(mandetory for 2 factor verification)"; // Your app password
+        final String username = "your-email@gmail.com"; // Your email address
+        final String password = "app password"; // Your app password
 
         Properties props = new Properties(); // Initialize Properties
         props.put("mail.smtp.auth", "true");

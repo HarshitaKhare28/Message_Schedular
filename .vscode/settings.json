@@ -1,0 +1,5 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/json-<version>.jar" // Replace <version> with the actual version number
+    ]
+}
