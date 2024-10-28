@@ -8,10 +8,16 @@ import java.util.Properties;
 public class EmailSender implements MessageSender {
     @Override
     public void sendMessage(Message message) {
-        final String username = "your-email@gmail.com"; // Your email address
-        final String password = "app password"; // Your app password
+        final String senderEmail = message.getSender();    // Get sender's email from Message
+        final String senderPassword = message.getPassword(); // Get sender's password from Message
 
-        Properties props = new Properties(); // Initialize Properties
+        if (senderEmail == null || senderPassword == null) {
+            System.out.println("Error: Email sender credentials are missing.");
+            return;
+        }
+
+        // Set email properties
+        Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", "smtp.gmail.com");
@@ -21,23 +27,24 @@ public class EmailSender implements MessageSender {
         Session session = Session.getInstance(props, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, password);
+                return new PasswordAuthentication(senderEmail, senderPassword);
             }
         });
 
         try {
-            // Create a default MimeMessage object
+            // Create a MimeMessage object
             MimeMessage mimeMessage = new MimeMessage(session);
-            mimeMessage.setFrom(new InternetAddress(username)); // Sender's email
-            mimeMessage.addRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(message.getRecipient())); // Receiver's email
-            mimeMessage.setSubject("Subject"); // Subject of the email
-            mimeMessage.setText(message.getBody()); // Body of the email
+            mimeMessage.setFrom(new InternetAddress(senderEmail));
+            mimeMessage.addRecipient(javax.mail.Message.RecipientType.TO, new InternetAddress(message.getRecipient()));
+            mimeMessage.setSubject("Subject"); // Set email subject
+            mimeMessage.setText(message.getBody()); // Set email body
 
             // Send message
             Transport.send(mimeMessage);
             System.out.println("Email sent successfully to: " + message.getRecipient());
         } catch (MessagingException e) {
             e.printStackTrace();
+            System.out.println("Failed to send email to: " + message.getRecipient());
         }
     }
 }
