@@ -1,5 +1,9 @@
 {
     "java.project.referencedLibraries": [
-        "lib/json-<version>.jar" // Replace <version> with the actual version number
+        "lib/json-<version>.jar",
+        "lib/java-dotenv-5.2.2.jar",
+        "lib/kotlin-stdlib-<version>.jar",
+        "lib/javax.mail.jar",
+        "lib/javax.activation.jar"
     ]
 }

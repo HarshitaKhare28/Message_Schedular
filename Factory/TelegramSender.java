@@ -1,5 +1,6 @@
 package Factory;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import Builder.Message;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -9,14 +10,12 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
-
 public class TelegramSender implements MessageSender {
 
-    private static final String TELEGRAM_API_KEY = "7726228384:AAGkddBgD3TivFI2bo0u0Jskt_JfMlIql7U" ;
+    private static final String TELEGRAM_API_KEY = Dotenv.load().get("TELEGRAM_API_KEY");
 
     @Override
     public void sendMessage(Message message) {
-
         if (TELEGRAM_API_KEY == null || TELEGRAM_API_KEY.isEmpty()) {
             System.out.println("Error: TELEGRAM_API_KEY environment variable is not set.");
             return;
@@ -47,7 +46,6 @@ public class TelegramSender implements MessageSender {
             int responseCode = connection.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 System.out.println("Message sent successfully to: " + message.getRecipient());
-
             } else {
                 System.out.println("Failed to send message. Response Code: " + responseCode);
                 // Print error details
